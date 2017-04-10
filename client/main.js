@@ -8,6 +8,7 @@ import {
 import './main.html';
 
 Wallets = new Mongo.Collection('wallets');
+Price = new Mongo.Collection('price');
 client = new CoinStack('c7dbfacbdf1510889b38c01b8440b1', '10e88e9904f29c98356fd2d12b26de');
 
 Template.home.onCreated(function helloOnCreated() {
@@ -36,6 +37,7 @@ Template.walletlist.events({
 Template.walletdetail.onCreated(function walletdetailOnCreated() {
   var address = FlowRouter.getParam('walletAdderss');
   Meteor.subscribe('mywallet', address);
+  Meteor.subscribe('price');
 });
 
 Template.walletdetail.rendered = function () {
@@ -77,6 +79,9 @@ Template.walletdetail.helpers({
   mywalletbalance() {
     var address = FlowRouter.getParam('walletAdderss');
     return Session.get(address + 'balance');
+  },
+  price() {
+    return Price.findOne({_id:'btc_bithumb'}).price;
   }
 });
 /*

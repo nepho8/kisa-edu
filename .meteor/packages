@@ -24,3 +24,6 @@ kadira:flow-router
 kadira:blaze-layout
 mrt:qrcodesvg
 session
+http
+spectrum:accounts-kakao
+accounts-ui
